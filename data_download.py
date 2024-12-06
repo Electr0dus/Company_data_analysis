@@ -44,3 +44,13 @@ def notify_if_strong_fluctuations(data, threshold):
         print('Значение больше порога!')
     else:
         return 0
+
+
+def export_data_to_csv(data, filename):
+    '''
+    Cохраняет загруженные данные об акциях в CSV файл.
+    :param data: DataFrame
+    :param filename: имя файла
+    :return: None
+    '''
+    data.to_csv(f'{filename}.csv')

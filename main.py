@@ -12,17 +12,17 @@ def main():
     ticker = input("Введите тикер акции (например, «AAPL» для Apple Inc):»")
     period = input("Введите период для данных (например, '1mo' для одного месяца): ")
     threshold = int(input('Введите порог превышения разницы цены закрытия: '))
+    file_name_csv = input('Введите имя файла для сохранения данных в формате CSV: ')
     # Fetch stock data
     stock_data = dd.fetch_stock_data(ticker, period)
 
     # Add moving average to the data
     stock_data = dd.add_moving_average(stock_data)
-
     # Plot the data
     dplt.create_and_save_plot(stock_data, ticker, period)
     dd.calculate_and_display_average_price(stock_data)
     dd.notify_if_strong_fluctuations(stock_data, threshold)
-
+    dd.export_data_to_csv(stock_data, file_name_csv)
 
 if __name__ == "__main__":
     main()
