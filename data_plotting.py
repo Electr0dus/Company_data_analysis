@@ -3,6 +3,15 @@ import pandas as pd
 
 
 def create_and_save_plot(data, ticker, period, filename=None):
+    '''
+    Создаёт график, отображающий цены закрытия и скользящие средние. Предоставляет возможность сохранения графика в файл.
+    Параметр filename опционален; если он не указан, имя файла генерируется автоматически.
+    :param data: DataFrame
+    :param ticker: Акция
+    :param period: Период определения
+    :param filename: Имя файла
+    :return:
+    '''
     plt.figure(figsize=(10, 6))
 
     if 'Date' not in data:
