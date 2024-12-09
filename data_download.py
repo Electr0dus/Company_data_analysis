@@ -1,4 +1,5 @@
 import yfinance as yf
+from technical_indicator.momentum import RSI
 
 
 def fetch_stock_data(ticker, period='1mo'):
@@ -54,3 +55,14 @@ def export_data_to_csv(data, filename):
     :return: None
     '''
     data.to_csv(f'{filename}.csv')
+
+
+def indicator_rsi(data, period=14):
+    '''
+    Расчёт RSI за указзанный период
+    :param data: DataFrame
+    :param period: Период RSI
+    :return: значение RSI за указанный период
+    '''
+    rsi = RSI(list(data['Close']), period)
+    return rsi.calculate_rsi()

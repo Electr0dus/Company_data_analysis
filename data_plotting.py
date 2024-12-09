@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
+import data_download as dd
+
 
 def create_and_save_plot(data, ticker, period, filename=None):
     '''
@@ -29,6 +31,9 @@ def create_and_save_plot(data, ticker, period, filename=None):
         plt.plot(data['Date'], data['Moving_Average'], label='Moving Average')
 
     plt.title(f"{ticker} Цена акций с течением времени")
+
+    plt.text(x=0, y=0.9, s=f'RSI = {dd.indicator_rsi(data, len(data))}', fontsize=15, color='green',
+             transform=plt.gca().transAxes)
     plt.xlabel("Дата")
     plt.ylabel("Цена")
     plt.legend()
