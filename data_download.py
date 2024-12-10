@@ -9,9 +9,16 @@ def fetch_stock_data(ticker, period='1mo'):
     :param period: период
     :return: Историю изменения цены закрытия
     '''
+    new_period = period.split()
     stock = yf.Ticker(ticker)
-    data = stock.history(period=period)
-    return data
+    # Если в списке одно значение, значит задан только период
+    if len(new_period) == 1:
+        data = stock.history(period=period)
+        return data
+    # Если в списке два значения, значит задан диапазон
+    elif len(new_period) == 2:
+        data = stock.history(start=new_period[0], end=new_period[1])
+        return data
 
 
 def add_moving_average(data, window_size=5):
