@@ -1,13 +1,14 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-
+from matplotlib import style
 import data_download as dd
 
 
-def create_and_save_plot(data, ticker, period, filename=None):
+def create_and_save_plot(data, ticker, period, style_name, filename=None):
     '''
     Создаёт график, отображающий цены закрытия и скользящие средние. Предоставляет возможность сохранения графика в файл.
     Параметр filename опционален; если он не указан, имя файла генерируется автоматически.
+    :param style_name: Стиль рисования графика
     :param data: DataFrame
     :param ticker: Акция
     :param period: Период определения
@@ -15,7 +16,7 @@ def create_and_save_plot(data, ticker, period, filename=None):
     :return:
     '''
     plt.figure(figsize=(10, 6))
-
+    plt.style.use(style_name)
     if 'Date' not in data:
         if pd.api.types.is_datetime64_any_dtype(data.index):
             dates = data.index.to_numpy()
@@ -34,6 +35,7 @@ def create_and_save_plot(data, ticker, period, filename=None):
 
     plt.text(x=0, y=0.9, s=f'RSI = {dd.indicator_rsi(data):.2f} за 14 дней', fontsize=15, color='green',
              transform=plt.gca().transAxes)
+
     plt.xlabel("Дата")
     plt.ylabel("Цена")
     plt.legend()
@@ -43,3 +45,6 @@ def create_and_save_plot(data, ticker, period, filename=None):
 
     plt.savefig(filename)
     print(f"График сохранен как {filename}")
+
+
+print(plt.style.available)

@@ -1,6 +1,8 @@
+from pprint import pprint
+
 import data_download as dd
 import data_plotting as dplt
-
+import matplotlib.pyplot as plt
 
 def main():
     print("Добро пожаловать в инструмент получения и построения графиков биржевых данных.")
@@ -13,13 +15,15 @@ def main():
     period = input("Введите период для данных (например, '1mo' для одного месяца или период начала измерения и оканчание 'YYYY-MM-DD YYYY-MM-DD'): ")
     threshold = int(input('Введите порог превышения разницы цены закрытия: '))
     file_name_csv = input('Введите имя файла для сохранения данных в формате CSV: ')
+    pprint(plt.style.available)
+    style = input('Введите стиль графика: ')
     # Fetch stock data
     stock_data = dd.fetch_stock_data(ticker, period)
 
     # Add moving average to the data
     stock_data = dd.add_moving_average(stock_data)
     # Plot the data
-    dplt.create_and_save_plot(stock_data, ticker, period)
+    dplt.create_and_save_plot(stock_data, ticker, period, style_name=style)
     dd.calculate_and_display_average_price(stock_data)
     dd.notify_if_strong_fluctuations(stock_data, threshold)
     dd.export_data_to_csv(stock_data, file_name_csv)
