@@ -1,6 +1,6 @@
 import yfinance as yf
 from technical_indicator.momentum import RSI
-
+import statistics
 
 def fetch_stock_data(ticker, period='1mo'):
     '''
@@ -73,3 +73,13 @@ def indicator_rsi(data, period=14):
     '''
     rsi = RSI(list(data['Close']), period)
     return rsi.calculate_rsi()
+
+
+def indicator_standart_devation_closing(data):
+    '''
+    Функция вычисляет стандартное отклонение цены закрытия
+    :param data: Цены закрытия
+    :return: расчёт отклонения цены закрытия
+    '''
+    return statistics.stdev(data['Close'])
+

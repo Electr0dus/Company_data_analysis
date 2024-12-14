@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from matplotlib import style
 import data_download as dd
 
 
@@ -35,7 +34,8 @@ def create_and_save_plot(data, ticker, period, style_name, filename=None):
 
     plt.text(x=0, y=0.9, s=f'RSI = {dd.indicator_rsi(data):.2f} за 14 дней', fontsize=15, color='green',
              transform=plt.gca().transAxes)
-
+    plt.text(x=0, y=0.8, s=f'STDev = {dd.indicator_standart_devation_closing(data):.2f}', fontsize=15, color='blue',
+             transform=plt.gca().transAxes)
     plt.xlabel("Дата")
     plt.ylabel("Цена")
     plt.legend()
