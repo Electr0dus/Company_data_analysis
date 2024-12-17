@@ -1,6 +1,9 @@
+import statistics
+
+import plotly.express as px
 import yfinance as yf
 from technical_indicator.momentum import RSI
-import statistics
+
 
 def fetch_stock_data(ticker, period='1mo'):
     '''
@@ -83,3 +86,14 @@ def indicator_standart_devation_closing(data):
     '''
     return statistics.stdev(data['Close'])
 
+
+def average_price_close(data):
+    '''
+    Функция принимает DataFrame и вычисляет среднее значение колонки 'Close'. Результат будет выводиться в консоль.
+    :param data: DataFrame
+    :return: Средняя цена закрытия за весь период
+    '''
+    # data['Close'].mean()
+
+    fig = px.line(x=data['Open'], y=data['Close'])
+    fig.show()
